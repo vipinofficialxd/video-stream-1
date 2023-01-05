@@ -10,9 +10,8 @@ from config import (
     OWNER_USERNAME,
     UPDATES_CHANNEL,
 )
-)
 from program import __version__
-from driver.veez import user
+
 from driver.filters import command, other_filters
 from pyrogram import Client, filters
 from pyrogram import __version__ as pyrover
