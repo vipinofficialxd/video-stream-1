@@ -1,5 +1,3 @@
-import asyncio
-
 from datetime import datetime
 from sys import version_info
 from time import time
@@ -7,22 +5,19 @@ from time import time
 from config import (
     ALIVE_IMG,
     ALIVE_NAME,
+    BOT_NAME,
     BOT_USERNAME,
     GROUP_SUPPORT,
-    OWNER_USERNAME,
+    OWNER_NAME,
     UPDATES_CHANNEL,
 )
 from program import __version__
-from driver.core import user, bot
+from driver.veez import user
 from driver.filters import command, other_filters
-from driver.database.dbchat import add_served_chat, is_served_chat
-from driver.database.dbpunish import is_gbanned_user
-from driver.database.dbusers import add_served_user
-from driver.database.dblockchat import blacklisted_chats
-from pyrogram import Client, filters, __version__ as pyrover
-from pyrogram.errors import FloodWait, MessageNotModified
+from pyrogram import Client, filters
+from pyrogram import __version__ as pyrover
 from pytgcalls import (__version__ as pytover)
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 __major__ = 0
 __minor__ = 2
@@ -57,59 +52,72 @@ async def _human_time_duration(seconds):
     command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 async def start_(client: Client, message: Message):
-    await message.reply_photo(
-        photo=f"https://telegra.ph/file/b8dd014a2cf7817df23a1.jpg",           
-        caption=f""" **☞ ✰Hello friends how are you !**\n
-☞ **✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !**
-
-🂱 **I Can Play Music In Your Group.Feel free to add me to your groups.!**
+    await message.reply_text(
+        f"""**☞ ✰Hᴇʟʟᴏ.. ❣ {message.from_user.mention()} ❣ !**\n
+**☞ ✰Iᴍ..[➖ ⃟💫🇧ʟᴀᴢᴇ ✘🇲ᴜsɪᴄ ‌‌ﮩ٨ـ 🎧ﮩ٨ـ](https://t.me/Blaze_Music_bot)**
+**☞ ✰Tʜɪs ɪs Vɪᴅᴇᴏ + Mᴜsɪᴄ🎶 RᴏBᴏᴛ ..**
+**☞ 📢 𝗣ᴏᴡᴇʀᴇᴅ 𝗕ʏ :- [Bʟᴀᴢᴇ](https://t.me/THE_BLAZE_NETWORK)!**
+**☞ ✰Fᴏʀ Mᴏʀᴇ Hᴇʟᴘ Usᴇ Bᴜᴛᴛᴏɴs Bᴇʟᴏᴡ Aɴᴅ Aʙᴏᴜᴛ Aʟʟ Fᴇᴀᴛᴜʀᴇ Oғ Tʜɪs Bᴏᴛ, Jᴜsᴛ Tyᴘᴇ /help**
 """,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("👷🏻 Basic Cmd", callback_data="command_list"),
-                    InlineKeyboardButton("Basic Info 📚", callback_data="user_guide"),
-                ],[
-                    InlineKeyboardButton("👷🏻 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("Channel 👮🏼", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                ],[
-                    InlineKeyboardButton("Summon me", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
-              
-                ],
-            ]
-        ),
-   )
-        
+    reply_markup=InlineKeyboardMarkup(
+       [
+          [
+             
+                  InlineKeyboardButton("🔐 𝗖ᴏᴍᴍᴀɴᴅꜱ", callback_data="cbcmds"),
+                  InlineKeyboardButton("𝗕ᴀ𝘀ɪᴄ 𝗚ᴜɪᴅᴇ🔰", callback_data="cbhowtouse")
+              ],
+              [
+                  InlineKeyboardButton(
+                      "✨𝗗ᴇᴠᴇʟᴏᴘ𝗲𝗿", url=f"https://t.me/log_afk"
+                  ),
+                  InlineKeyboardButton(
+                      "𝗗ᴇᴠᴇʟᴏᴘ𝗲𝗿 Ⅱ💠", url=f"https://t.me/Evil_xD_boy"
+                  ),
+              ],
+              [
+                  InlineKeyboardButton(
+                      "⚙️ 𝐒ᴜᴘᴘᴏʀᴛ ", url=f"https://t.me/Blaze_Support"
+                  ),
+                  InlineKeyboardButton(
+                      "𝐔ᴘᴅᴀᴛᴇ𝘀 🏜️", url=f"https://t.me/all_Dear_comrade"
+              ),
+          ],
+          [
+              InlineKeyboardButton(
+                  "🎇 𝐂ʜᴀᴛ 𝐙ᴏɴᴇ", url=f"https://t.me/UNIQUE_SOCIETY"
+              ),
+              InlineKeyboardButton(
+                    "𝐅ɪɢʜᴛɪɴɢ 𝐂ʟᴜʙ✨", url=f"https://t.me/THE_BLAZE_FIGHTER"
+             )
+          ],
+      ]
+   ),
+   disable_web_page_preview=True,
+)
+
 
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
 )
-async def alive(c: Client, message: Message):
-    user_id = message.from_user.id
-    if await is_gbanned_user(user_id):
-        await message.reply_text("❗️ **You've blocked from using this bot!**")
-        return
-    chat_id = message.chat.id
+async def alive(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
-    BOT_NAME = (await c.get_me()).first_name
-    
+
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("✨ Group", url=f"https://t.me/{GROUP_SUPPORT}"),
+                InlineKeyboardButton("👤 Gʀᴏᴜᴘ", url=f"https://t.me/UNIQUE_SOCIETY"),
                 InlineKeyboardButton(
-                    "📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    "📣 Cʜᴀɴɴᴇʟ", url=f"https://t.me/the_blaze_Network"
                 ),
             ]
         ]
     )
 
-    alive = f"**Hello {message.from_user.mention()}, i'm {BOT_NAME}**\n\n🧑🏼‍💻 My Master: [{ALIVE_NAME}](https://t.me/{OWNER_USERNAME})\n👾 Bot Version: `v{__version__}`\n🔥 Pyrogram Version: `{pyrover}`\n🐍 Python Version: `{__python_version__}`\n✨ PyTgCalls Version: `{pytover.__version__}`\n🆙 Uptime Status: `{uptime}`\n\n❤ **Thanks for Adding me here, for playing video & music on your Group's video chat**"
+    alive = f"**Hello {message.from_user.mention()}, i'm {BOT_NAME}**\n\n✨ Bot is working normally\n🍀 My Master: [{ALIVE_NAME}](https://t.me/{OWNER_NAME})\n✨ Bot Version: `v{__version__}`\n🍀 Pyrogram Version: `{pyrover}`\n✨ Python Version: `{__python_version__}`\n🍀 PyTgCalls version: `{pytover.__version__}`\n✨ Uptime Status: `{uptime}`\n\n**Thanks for Adding me here, for playing video & music on your Group's video chat** ❤"
 
-    await c.send_photo(
-        chat_id,
+    await message.reply_photo(
         photo=f"{ALIVE_IMG}",
         caption=alive,
         reply_markup=keyboard,
@@ -117,11 +125,7 @@ async def alive(c: Client, message: Message):
 
 
 @Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
-async def ping_pong(c: Client, message: Message):
-    user_id = message.from_user.id
-    if await is_gbanned_user(user_id):
-        await message.reply_text("❗️ **You've blocked from using this bot!**")
-        return
+async def ping_pong(client: Client, message: Message):
     start = time()
     m_reply = await message.reply_text("pinging...")
     delta_ping = time() - start
@@ -129,11 +133,7 @@ async def ping_pong(c: Client, message: Message):
 
 
 @Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
-async def get_uptime(c: Client, message: Message):
-    user_id = message.from_user.id
-    if await is_gbanned_user(user_id):
-        await message.reply_text("❗️ **You've blocked from using this bot!**")
-        return
+async def get_uptime(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
@@ -144,37 +144,16 @@ async def get_uptime(c: Client, message: Message):
     )
 
 
-@Client.on_chat_join_request()
-async def approve_join_chat(c: Client, m: ChatJoinRequest):
-    if not m.from_user:
-        return
-    try:
-        await c.approve_chat_join_request(m.chat.id, m.from_user.id)
-    except FloodWait as e:
-        await asyncio.sleep(e.x + 2)
-        await c.approve_chat_join_request(m.chat.id, m.from_user.id)
-
-
 @Client.on_message(filters.new_chat_members)
 async def new_chat(c: Client, m: Message):
-    chat_id = m.chat.id
-    if await is_served_chat(chat_id):
-        pass
-    else:
-        await add_served_chat(chat_id)
     ass_uname = (await user.get_me()).username
     bot_id = (await c.get_me()).id
     for member in m.new_chat_members:
-        if chat_id in await blacklisted_chats():
-            await m.reply(
-                "❗️ This chat has blacklisted by sudo user and You're not allowed to use me in this chat."
-            )
-            return await bot.leave_chat(chat_id)
         if member.id == bot_id:
             return await m.reply(
-                "❤️ Thanks for adding me to the **Group** !\n\n"
-                "Appoint me as administrator in the **Group**, otherwise I will not be able to work properly, and don't forget to type `/userbotjoin` for invite the assistant.\n\n"
-                "Once done, then type `/reload`",
+                "❤️ **Thanks for adding me to the Group !**\n\n"
+                "**Promote me as administrator of the Group, otherwise I will not be able to work properly, and don't forget to type /userbotjoin for invite the assistant.**\n\n"
+                "**Once done, type** /reload",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -187,26 +166,3 @@ async def new_chat(c: Client, m: Message):
                     ]
                 )
             )
-
-
-chat_watcher_group = 10
-
-@Client.on_message(group=chat_watcher_group)
-async def chat_watcher_func(_, message: Message):
-    if message.from_user:
-        user_id = message.from_user.id
-        await add_served_user(user_id)
-        return
-    try:
-        userid = message.from_user.id
-    except Exception:
-        return
-    suspect = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
-    if await is_gbanned_user(userid):
-        try:
-            await message.chat.ban_member(userid)
-        except Exception:
-            return
-        await message.reply_text(
-            f"👮🏼 (> {suspect} <)\n\n**Gbanned** user detected, that user has been gbanned by sudo user and was blocked from this Chat !\n\n🚫 **Reason:** potential spammer and abuser."
-        )
