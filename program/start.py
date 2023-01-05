@@ -5,10 +5,9 @@ from time import time
 from config import (
     ALIVE_IMG,
     ALIVE_NAME,
-    BOT_NAME,
     BOT_USERNAME,
     GROUP_SUPPORT,
-    OWNER_NAME,
+    OWNER_USERNAME,
     UPDATES_CHANNEL,
 )
 from program import __version__
