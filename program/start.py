@@ -1,4 +1,3 @@
-𝐂ᴀᴘᴛᴀɪɴ ✘𝐂ʜᴀʀʟᴇ𝐬™ [🇮🇳]:
 import asyncio
 
 from datetime import datetime
