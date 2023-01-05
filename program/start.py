@@ -7,7 +7,9 @@ from config import (
     ALIVE_NAME,
     BOT_USERNAME,
     GROUP_SUPPORT,
+    OWNER_USERNAME,
     UPDATES_CHANNEL,
+)
 )
 from program import __version__
 from driver.veez import user
