@@ -1,3 +1,5 @@
+import asyncio
+
 from datetime import datetime
 from sys import version_info
 from time import time
@@ -11,11 +13,16 @@ from config import (
     UPDATES_CHANNEL,
 )
 from program import __version__
+from driver.core import user, bot
 from driver.filters import command, other_filters
-from pyrogram import Client, filters
-from pyrogram import __version__ as pyrover
+from driver.database.dbchat import add_served_chat, is_served_chat
+from driver.database.dbpunish import is_gbanned_user
+from driver.database.dbusers import add_served_user
+from driver.database.dblockchat import blacklisted_chats
+from pyrogram import Client, filters, __version__ as pyrover
+from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
 
 __major__ = 0
 __minor__ = 2
@@ -44,8 +51,6 @@ async def _human_time_duration(seconds):
         if amount > 0:
             parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else "s"))
     return ", ".join(parts)
-
-
 @Client.on_message(
     command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
