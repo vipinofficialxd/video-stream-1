@@ -5,9 +5,10 @@ from time import time
 from config import (
     ALIVE_IMG,
     ALIVE_NAME,
+    BOT_NAME,
     BOT_USERNAME,
     GROUP_SUPPORT,
-    OWNER_USERNAME,
+    OWNER_NAME,
     UPDATES_CHANNEL,
 )
 from program import __version__
@@ -50,53 +51,48 @@ async def _human_time_duration(seconds):
 @Client.on_message(
     command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
-async def start_(client: Client, message: Message):
+async def text_(client: Client, message: Message):
     await message.reply_text(
-        f"""**☞ ✰Hᴇʟʟᴏ.. ❣ {message.from_user.mention()} ❣ !**\n
-**☞ ✰Iᴍ..[➖ ⃟💫🇧ʟᴀᴢᴇ ✘🇲ᴜsɪᴄ ‌‌ﮩ٨ـ 🎧ﮩ٨ـ](https://t.me/Blaze_Music_bot)**
-**☞ ✰Tʜɪs ɪs Vɪᴅᴇᴏ + Mᴜsɪᴄ🎶 RᴏBᴏᴛ ..**
-**☞ 📢 𝗣ᴏᴡᴇʀᴇᴅ 𝗕ʏ :- [Bʟᴀᴢᴇ](https://t.me/THE_BLAZE_NETWORK)!**
-**☞ ✰Fᴏʀ Mᴏʀᴇ Hᴇʟᴘ Usᴇ Bᴜᴛᴛᴏɴs Bᴇʟᴏᴡ Aɴᴅ Aʙᴏᴜᴛ Aʟʟ Fᴇᴀᴛᴜʀᴇ Oғ Tʜɪs Bᴏᴛ, Jᴜsᴛ Tyᴘᴇ /help**
-""",
-    reply_markup=InlineKeyboardMarkup(
-       [
-          [
-             
-                  InlineKeyboardButton("🔐 𝗖ᴏᴍᴍᴀɴᴅꜱ", callback_data="cbcmds"),
-                  InlineKeyboardButton("𝗕ᴀ𝘀ɪᴄ 𝗚ᴜɪᴅᴇ🔰", callback_data="cbhowtouse")
-              ],
-              [
-                  InlineKeyboardButton(
-                      "✨𝗗ᴇᴠᴇʟᴏᴘ𝗲𝗿", url=f"https://t.me/log_afk"
-                  ),
-                  InlineKeyboardButton(
-                      "𝗗ᴇᴠᴇʟᴏᴘ𝗲𝗿 Ⅱ💠", url=f"https://t.me/Evil_xD_boy"
-                  ),
-              ],
-              [
-                  InlineKeyboardButton(
-                      "⚙️ 𝐒ᴜᴘᴘᴏʀᴛ ", url=f"https://t.me/Blaze_Support"
-                  ),
-                  InlineKeyboardButton(
-                      "𝐔ᴘᴅᴀᴛᴇ𝘀 🏜️", url=f"https://t.me/all_Dear_comrade"
-              ),
-          ],
-          [
-              InlineKeyboardButton(
-                  "🎇 𝐂ʜᴀᴛ 𝐙ᴏɴᴇ", url=f"https://t.me/UNIQUE_SOCIETY"
-              ),
-              InlineKeyboardButton(
-                    "𝐅ɪɢʜᴛɪɴɢ 𝐂ʟᴜʙ✨", url=f"https://t.me/THE_BLAZE_FIGHTER"
-             )
-          ],
-      ]
-   ),
-   disable_web_page_preview=True,
-)
+        f"""✨ **Welcome {message.from_user.mention()} !**\n
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **ALLOWS YOU TO PLAY MUSIC AND VIDEO ON GROUPS THROUGH THE NEW TELEGRAM'S VIDEO CHATS!!**
 
+💡 **FIND OUT ALL THE BOT'S COMMANDS AND HOW THEY WORK BY CLICKING ON THE » 📚  COMMANDS BUTTON!**
 
+🔖 **TO KNOW HOW TO USE THIS BOT, PLEASE CLICK ON THE » ❓ BASIC GUIDE BUTTON!**
+"""
+   ,
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "➕ 📍 ADD ME TO YOUR GROUP 📍 ➕",
+                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                    )
+                ],
+                
+                [
+                    InlineKeyboardButton("COMMANDS 📚", callback_data="cbcmds"),
+                    InlineKeyboardButton("DONATE ❤️", url=f"https://t.me/{OWNER_NAME}"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "OFFICIAL GROUP 💖", url=f"https://t.me/{GROUP_SUPPORT}"
+                    ),
+                    InlineKeyboardButton(
+                        " OFFICIAL CHANNEL 😎", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    ),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "🔹 SOURCE CODE 🔹", url="https://github.com/PRAGULOFFICIAL/MUSIC-BOT"
+                    )
+                ],
+            ]
+        ),
+        disable_web_page_preview=True,
+    )
 @Client.on_message(
-    command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
+    command(["alive", f"alive@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 async def alive(client: Client, message: Message):
     current_time = datetime.utcnow()
@@ -106,9 +102,9 @@ async def alive(client: Client, message: Message):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("👤 Gʀᴏᴜᴘ", url=f"https://t.me/UNIQUE_SOCIETY"),
+                InlineKeyboardButton("✨ Group", url=f"https://t.me/{GROUP_SUPPORT}"),
                 InlineKeyboardButton(
-                    "📣 Cʜᴀɴɴᴇʟ", url=f"https://t.me/the_blaze_Network"
+                    "📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
                 ),
             ]
         ]
@@ -123,8 +119,8 @@ async def alive(client: Client, message: Message):
     )
 
 
-@Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
-async def ping_pong(client: Client, message: Message):
+@Client.on_message(command(["ping", f"ng@{BOT_USERNAME}"]) & ~filters.edited)
+async def ping(client: Client, message: Message):
     start = time()
     m_reply = await message.reply_text("pinging...")
     delta_ping = time() - start
@@ -150,17 +146,14 @@ async def new_chat(c: Client, m: Message):
     for member in m.new_chat_members:
         if member.id == bot_id:
             return await m.reply(
-                "❤️ **Thanks for adding me to the Group !**\n\n"
-                "**Promote me as administrator of the Group, otherwise I will not be able to work properly, and don't forget to type /userbotjoin for invite the assistant.**\n\n"
-                "**Once done, type** /reload",
+                "❤️ **Thanks for adding me to the Group !**\n"
+                "**Promote me as administrator of the group, otherwise I will not be able to work properly**\n\n"
+                "**Once done, type** /reload\n\n"
+                "**New to szrosebot, Touch the below button to for quick setup guide**",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("📣 Channel", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                            InlineKeyboardButton("💭 Support", url=f"https://t.me/{GROUP_SUPPORT}")
-                        ],
-                        [
-                            InlineKeyboardButton("👤 Assistant", url=f"https://t.me/{ass_uname}")
+                            InlineKeyboardButton("quick setup guide", url="https://t.me/Miss_Akshi_updates/16")
                         ]
                     ]
                 )
