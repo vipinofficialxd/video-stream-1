@@ -5,7 +5,6 @@ from time import time
 from config import (
     ALIVE_IMG,
     ALIVE_NAME,
-    BOT_NAME,
     BOT_USERNAME,
     GROUP_SUPPORT,
     OWNER_NAME,
