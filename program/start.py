@@ -10,7 +10,6 @@ from config import (
     OWNER_USERNAME,
     UPDATES_CHANNEL,
 )
-)
 from program import __version__
 from driver.veez import user
 from driver.filters import command, other_filters
