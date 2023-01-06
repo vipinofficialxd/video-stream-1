@@ -81,7 +81,7 @@ async def _human_time_duration(seconds):
 )
 async def text_(client: Client, message: Message):
     await message.reply_text(
-        f"""✨ **Welcome {message.from_user.mention()} !**\n
+        f"""✨ **Welcome!**\n
 💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **ALLOWS YOU TO PLAY MUSIC AND VIDEO ON GROUPS THROUGH THE NEW TELEGRAM'S VIDEO CHATS!!**
 
 💡 **FIND OUT ALL THE BOT'S COMMANDS AND HOW THEY WORK BY CLICKING ON THE » 📚  COMMANDS BUTTON!**
