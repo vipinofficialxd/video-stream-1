@@ -79,19 +79,15 @@ async def _human_time_duration(seconds):
 @Client.on_message(
     command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
-@check_blacklist()
-async def start_(c: Client, message: Message):
-    user_id = message.from_user.id
-    await add_served_user(user_id)   
-    await message.reply_photo(      
-        photo=f"https://telegra.ph/file/16f554eacad2ba383a119.jpg",       
-        caption=f""" **☞ ✰Hello friends how are you !**\n
-☞ **✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !**
+async def text_(client: Client, message: Message):
+    await message.reply_text(
+        f"""✨ **Welcome {message.from_user.mention()} !**\n
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **ALLOWS YOU TO PLAY MUSIC AND VIDEO ON GROUPS THROUGH THE NEW TELEGRAM'S VIDEO CHATS!!**
 
-🂱 **I Can Play Music In Your Group.Feel free to add me to your groups.!**
+💡 **FIND OUT ALL THE BOT'S COMMANDS AND HOW THEY WORK BY CLICKING ON THE » 📚  COMMANDS BUTTON!**
 
-🔖 **Powered By:- [𐏓〬⃝ ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ Official ➣LOG⛦ AFK xͮD ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ ااـ꯭](https://t.me/Official_afk_xD)!**
-""",
+🔖 **TO KNOW HOW TO USE THIS BOT, PLEASE CLICK ON THE » ❓ BASIC GUIDE BUTTON!**
+"""
         reply_markup=InlineKeyboardMarkup(
             [
                 [
