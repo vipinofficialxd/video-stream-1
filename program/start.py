@@ -81,12 +81,7 @@ async def _human_time_duration(seconds):
 )
 async def text_(client: Client, message: Message):
     await message.reply_text(
-        f"""✨ **Welcome!**\n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **ALLOWS YOU TO PLAY MUSIC AND VIDEO ON GROUPS THROUGH THE NEW TELEGRAM'S VIDEO CHATS!!**
-
-💡 **FIND OUT ALL THE BOT'S COMMANDS AND HOW THEY WORK BY CLICKING ON THE » 📚  COMMANDS BUTTON!**
-
-🔖 **TO KNOW HOW TO USE THIS BOT, PLEASE CLICK ON THE » ❓ BASIC GUIDE BUTTON!**
+        f"""Hello, My name is Kiara Robot.\n\nI'm a telegram streaming bot with some useful features. Supporting platforms like Youtube, Spotify, Resso, AppleMusic , Soundcloud etc.\n\nFeel free to add me to your groups.
 """
         reply_markup=InlineKeyboardMarkup(
             [
