@@ -82,7 +82,7 @@ async def _human_time_duration(seconds):
 async def text_(client: Client, message: Message):
     await message.reply_text(
         f"""Hello, My name is Kiara Robot.\n\nI'm a telegram streaming bot with some useful features. Supporting platforms like Youtube, Spotify, Resso, AppleMusic , Soundcloud etc.\n\nFeel free to add me to your groups.
-"""
+""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
