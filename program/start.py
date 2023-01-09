@@ -89,30 +89,18 @@ async def text_(client: Client, message: Message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "🔎 How to Use? Commands Menu.",
-                        callback_data="command_list",
-                    )
-                ], 
-                [            
-                    InlineKeyboardButton("▪ Support", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("Updates ▪", url=f"https://t.me/{UPDATES_CHANNEL}"),               
+                    InlineKeyboardButton("👷🏻 Basic Cmd", callback_data="command_list"),
+                    InlineKeyboardButton("Basic Info 📚", callback_data="user_guide"),
+                ],[
+                    InlineKeyboardButton("👷🏻 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
+                    InlineKeyboardButton("Channel 👮🏼", url=f"https://t.me/{UPDATES_CHANNEL}"),
+                ],[
+                    InlineKeyboardButton("Summon me", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+              
                 ],
-                [
-                    InlineKeyboardButton(
-                        "✚ Add me to your Group ✚", url=f"https://t.me/{me_bot.username}?startgroup=true"),
-                ],
-                [
-                    InlineKeyboardButton(
-                        "▪ Chatting xD", url=f"https://t.me/UNIQUE_SOCIETY"
-                    ),
-                    InlineKeyboardButton(
-                        "Source Code ▪", url=f"t.me/iTZZ_OFFICIAL"                  
-                    ),               
-                ]
             ]
         ),
-   ) 
+   )
 
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
