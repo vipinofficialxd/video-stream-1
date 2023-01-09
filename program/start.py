@@ -80,8 +80,11 @@ async def _human_time_duration(seconds):
     command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 async def text_(client: Client, message: Message):
-    await message.reply_text(
-        f"""Hello, My name is Kiara Robot.\n\nI'm a telegram streaming bot with some useful features. Supporting platforms like Youtube, Spotify, Resso, AppleMusic , Soundcloud etc.\n\nFeel free to add me to your groups.
+    await message.reply_photo(
+        photo=f"https://telegra.ph/file/b8dd014a2cf7817df23a1.jpg",           
+        caption=f""" **☞ ✰Hello friends how are you !**\n
+☞ **✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !**
+🂱 **I Can Play Music In Your Group.Feel free to add me to your groups.!**
 """,
         reply_markup=InlineKeyboardMarkup(
             [
