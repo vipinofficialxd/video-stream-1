@@ -79,7 +79,7 @@ async def _human_time_duration(seconds):
 @Client.on_message(
     command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
-    async def start_(client: Client, message: Message):
+async def start_(client: Client, message: Message):
     await message.reply_photo(
         photo=f"https://telegra.ph/file/b8dd014a2cf7817df23a1.jpg",           
         caption=f""" ☞ ✰Hello friends how are you !\n
