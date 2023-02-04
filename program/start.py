@@ -93,19 +93,19 @@ async def start_(c: Client, message: Message):
 """,
         reply_markup=InlineKeyboardMarkup(
             [
-                [
-                    InlineKeyboardButton("👷🏻 Basic Cmd", callback_data="command_list"),
-                    InlineKeyboardButton("Basic Info 📚", callback_data="user_guide"),
+                [                    
+                    InlineKeyboardButton("📚 Cᴏᴍᴍᴀɴᴅs", callback_data="command_list"),
+                    InlineKeyboardButton("Bᴀsɪᴄ Iɴғᴏ ", callback_data="user_guide")    
                 ],[
-                    InlineKeyboardButton("👷🏻 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("Channel 👮🏼", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                ],[
-                    InlineKeyboardButton("Summon me", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
-              
+                    InlineKeyboardButton("• Cʜᴀᴛᴢᴏɴᴇ", url=f"https://t.me/LOVE_X_POISONS"),
+                    InlineKeyboardButton(" Cʜᴀᴛᴢᴏɴᴇ •", url=f"https://t.me/UNIQUE_SOCIETY")
+               ],[                    
+                    InlineKeyboardButton("➕ Aᴅᴅ Mᴇ Tᴏ Uʀ Gʀᴏᴜᴘ ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
                 ],
             ]
         ),
-   )
+        disable_web_page_preview=True,
+    )
 
 
 @Client.on_message(
