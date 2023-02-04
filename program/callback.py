@@ -1,30 +1,12 @@
+# Copyright (C) 2021 By VeezMusicProject
 
-"""
-Video + Music Stream Telegram Bot
-Copyright (c) 2022-present levina=lab <https://github.com/levina-lab>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but without any warranty; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/licenses.html>
-"""
-
-
-from driver.core import me_bot, me_user
+from driver.core import user, bot
 from driver.queues import QUEUE
-from driver.decorators import check_blacklist
-from program.utils.inline import menu_markup, stream_markup
-
+from driver.database.dbpunish import is_gbanned_user
 from pyrogram import Client, filters
+from program.utils.inline import menu_markup, stream_markup
 from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
+
 from config import (
     BOT_USERNAME,
     GROUP_SUPPORT,
@@ -36,32 +18,32 @@ from config import (
 
 
 @Client.on_callback_query(filters.regex("home_start"))
-@check_blacklist()
 async def start_set(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    BOT_NAME = (await bot.get_me()).first_name
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.answer("home start")
     await query.edit_message_text(
-        f"""☞ ✰Hᴇʟʟᴏ...  ‌ {message.from_user.mention()} 👋🏻\n
-☞ ✰Iᴍ.. [{me_bot.first_name}](https://t.me/{me_bot.username}) .
+        f""" **☞ ✰Hello friends how are you !**\n
+☞ **✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !**
 
-☞ ✰Tʜɪs ɪs Vɪᴅᴇᴏ + Mᴜsɪᴄ🎶 RᴏBᴏᴛ .. 
+🂱 **I Can Play Music In Your Group.Feel free to add me to your groups.!**
 
-☞ ✰Fᴏʀ Mᴏʀᴇ Hᴇʟᴘ Usᴇ Bᴜᴛᴛᴏɴs Bᴇʟᴏᴡ Aɴᴅ Aʙᴏᴜᴛ Aʟʟ Fᴇᴀᴛᴜʀᴇ Oғ Tʜɪs Bᴏᴛ, Jᴜsᴛ Tyᴘᴇ /help .
-Powered By- [</Official ➣LOG⛦ AFK xͮD](t.me/Official_Afk_xD) .
+🔖 **Powered By:- [𐏓〬⃝ ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ 𝐒 𝐀 𝐌 ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ ااـ꯭](https://t.me/Piro_x_power)!**
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("➕ Add me to a Group ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
+                    InlineKeyboardButton("👷🏻 Basic Cmd", callback_data="command_list"),
+                    InlineKeyboardButton("Basic Info 📚", callback_data="user_guide"),
                 ],[
-                    InlineKeyboardButton("❓ Basic Guide", callback_data="user_guide")
+                    InlineKeyboardButton("👷🏻 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
+                    InlineKeyboardButton("Channel 👮🏼", url=f"https://t.me/{UPDATES_CHANNEL}"),
                 ],[
-                    InlineKeyboardButton("📚 Commands", callback_data="command_list"),
-                    InlineKeyboardButton("❤️ Donate", url=f"https://t.me/{OWNER_USERNAME}")
-                ],[
-                    InlineKeyboardButton("👥 Support Group", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("📣 Support Channel", url=f"https://t.me/{UPDATES_CHANNEL}")
-                ],[
-                    InlineKeyboardButton("🌐 Source Code", url="https://github.com/levina-lab/video-stream")
+                    InlineKeyboardButton("Summon me", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+              
                 ],
             ]
         ),
@@ -70,8 +52,12 @@ Powered By- [</Official ➣LOG⛦ AFK xͮD](t.me/Official_Afk_xD) .
 
 
 @Client.on_callback_query(filters.regex("quick_use"))
-@check_blacklist()
 async def quick_set(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    ass_uname = (await user.get_me()).username
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.answer("quick bot usage")
     await query.edit_message_text(
         f"""ℹ️ Quick use Guide bot, please read fully !
@@ -84,15 +70,19 @@ async def quick_set(_, query: CallbackQuery):
 
 ❓ Have questions? Contact us in [Support Group](https://t.me/{GROUP_SUPPORT}).""",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="user_guide")]]
+            [[InlineKeyboardButton("🔙 Go Back", callback_data="command_list")]]
         ),
         disable_web_page_preview=True,
     )
 
 
 @Client.on_callback_query(filters.regex("user_guide"))
-@check_blacklist()
 async def guide_set(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    ass_uname = (await user.get_me()).username
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.answer("user guide")
     await query.edit_message_text(
         f"""❓ How to use this Bot ?, read the Guide below !
@@ -100,7 +90,7 @@ async def guide_set(_, query: CallbackQuery):
 1.) First, add this bot to your Group.
 2.) Then, promote this bot as administrator on the Group also give all permissions except Anonymous admin.
 3.) After promoting this bot, type /reload in Group to update the admin data.
-3.) Invite @{me_user.username} to your group or type /userbotjoin to invite her, unfortunately the userbot will joined by itself when you type `/play (song name)` or `/vplay (song name)`.
+3.) Invite @{ass_uname} to your group or type /userbotjoin to invite her, unfortunately the userbot will joined by itself when you type `/play (song name)` or `/vplay (song name)`.
 4.) Turn on/Start the video chat first before start to play video/music.
 
 `- END, EVERYTHING HAS BEEN SETUP -`
@@ -109,21 +99,17 @@ async def guide_set(_, query: CallbackQuery):
 
 💡 If you have a follow-up questions about this bot, you can tell it on my support chat here: @{GROUP_SUPPORT}.""",
         reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("» Quick use Guide «", callback_data="quick_use")
-                ],[
-                    InlineKeyboardButton("🔙 Go Back", callback_data="home_start")
-                ],
-            ]
+            [[InlineKeyboardButton("🔙 Go Back", callback_data="home_start")]]
         ),
     )
 
 
 @Client.on_callback_query(filters.regex("command_list"))
-@check_blacklist()
 async def commands_set(_, query: CallbackQuery):
     user_id = query.from_user.id
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.answer("commands menu")
     await query.edit_message_text(
         f"""✨ **Hello [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**
@@ -134,6 +120,8 @@ All commands can be used with (`! / .`) handler""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
+                    InlineKeyboardButton("» Quick use Guide «", callback_data="quick_use"),
+                ],[
                     InlineKeyboardButton("👮🏻‍♀️ Admins Commands", callback_data="admin_command"),
                 ],[
                     InlineKeyboardButton("👩🏻‍💼 Users Commands", callback_data="user_command"),
@@ -149,24 +137,29 @@ All commands can be used with (`! / .`) handler""",
 
 
 @Client.on_callback_query(filters.regex("user_command"))
-@check_blacklist()
 async def user_set(_, query: CallbackQuery):
+    BOT_NAME = (await bot.get_me()).first_name
+    user_id = query.from_user.id
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.answer("basic commands")
     await query.edit_message_text(
         f"""✏️ Command list for all user.
 
-» /play (song name/youtube link) - play the music from youtube
-» /stream (m3u8/youtube live link) - play youtube/m3u8 live stream music
-» /vplay (video name/youtube link) - play the video from youtube
-» /vstream (m3u8/youtube live link) - play youtube/m3u8 live stream video
-» /playlist - view the queue list of songs and current playing song
-» /lyric (query) - search for song lyrics based on the name of the song
+» /play (song name/link) - play music on video chat
+» /vplay (video name/link) - play video on video chat
+» /vstream (m3u8/yt live link) - play live stream video
+» /playlist - see the current playing song
+» /lyric (query) - scrap the song lyric
 » /video (query) - download video from youtube
 » /song (query) - download song from youtube
-» /search (query) - search for the youtube video link
+» /search (query) - search a youtube video link
 » /ping - show the bot ping status
 » /uptime - show the bot uptime status
-» /alive - show the bot alive info (in Group only)""",
+» /alive - show the bot alive info (in Group only)
+
+⚡️ __Powered by {BOT_NAME} AI__""",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("🔙 Go Back", callback_data="command_list")]]
         ),
@@ -174,8 +167,12 @@ async def user_set(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("admin_command"))
-@check_blacklist()
 async def admin_set(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    BOT_NAME = (await bot.get_me()).first_name
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.answer("admin commands")
     await query.edit_message_text(
         f"""✏️ Command list for group admin.
@@ -190,8 +187,8 @@ async def admin_set(_, query: CallbackQuery):
 » /reload - reload bot and refresh the admin data
 » /userbotjoin - invite the userbot to join group
 » /userbotleave - order userbot to leave from group
-» /startvc - start/restart the group call
-» /stopvc - stop/discard the group call""",
+
+⚡️ __Powered by {BOT_NAME} AI__""",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("🔙 Go Back", callback_data="command_list")]]
         ),
@@ -199,9 +196,12 @@ async def admin_set(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("sudo_command"))
-@check_blacklist()
 async def sudo_set(_, query: CallbackQuery):
     user_id = query.from_user.id
+    BOT_NAME = (await bot.get_me()).first_name
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     if user_id not in SUDO_USERS:
         await query.answer("⚠️ You don't have permissions to click this button\n\n» This button is reserved for sudo members of this bot.", show_alert=True)
         return
@@ -216,9 +216,10 @@ async def sudo_set(_, query: CallbackQuery):
 » /blocklist - show you the list of all blacklisted chat
 » /speedtest - run the bot server speedtest
 » /sysinfo - show the system information
-» /logs - generate the current bot logs
-» /eval - run an code
-» /sh - run an code""",
+» /eval - execute any code (`developer stuff`)
+» /sh - run any command (`developer stuff`)
+
+⚡ __Powered by {BOT_NAME} AI__""",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("🔙 Go Back", callback_data="command_list")]]
         ),
@@ -226,9 +227,12 @@ async def sudo_set(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("owner_command"))
-@check_blacklist()
 async def owner_set(_, query: CallbackQuery):
     user_id = query.from_user.id
+    BOT_NAME = (await bot.get_me()).first_name
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     if user_id not in OWNER_ID:
         await query.answer("⚠️ You don't have permissions to click this button\n\n» This button is reserved for owner of this bot.", show_alert=True)
         return
@@ -239,11 +243,13 @@ async def owner_set(_, query: CallbackQuery):
 » /gban (`username` or `user_id`) - for global banned people, can be used only in group
 » /ungban (`username` or `user_id`) - for un-global banned people, can be used only in group
 » /update - update your bot to latest version
-» /restart - restart your bot server
+» /restart - restart your bot directly
 » /leaveall - order userbot to leave from all group
 » /leavebot (`chat id`) - order bot to leave from the group you specify
 » /broadcast (`message`) - send a broadcast message to all groups in bot database
-» /broadcast_pin (`message`) - send a broadcast message to all groups in bot database with the chat pin""",
+» /broadcast_pin (`message`) - send a broadcast message to all groups in bot database with the chat pin
+
+⚡ __Powered by {BOT_NAME} AI__""",
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("🔙 Go Back", callback_data="command_list")]]
         ),
@@ -251,9 +257,11 @@ async def owner_set(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("stream_menu_panel"))
-@check_blacklist()
 async def at_set_markup_menu(_, query: CallbackQuery):
     user_id = query.from_user.id
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer("💡 Only admin with manage video chat permission that can tap this button !", show_alert=True)
@@ -268,8 +276,11 @@ async def at_set_markup_menu(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("stream_home_panel"))
-@check_blacklist()
 async def is_set_home_menu(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer("💡 Only admin with manage video chat permission that can tap this button !", show_alert=True)
@@ -280,8 +291,11 @@ async def is_set_home_menu(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("set_close"))
-@check_blacklist()
 async def on_close_menu(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer("💡 Only admin with manage video chat permission that can tap this button !", show_alert=True)
@@ -289,6 +303,9 @@ async def on_close_menu(_, query: CallbackQuery):
 
 
 @Client.on_callback_query(filters.regex("close_panel"))
-@check_blacklist()
 async def in_close_panel(_, query: CallbackQuery):
+    user_id = query.from_user.id
+    if await is_gbanned_user(user_id):
+        await query.answer("❗️ You've blocked from using this bot!", show_alert=True)
+        return
     await query.message.delete()
