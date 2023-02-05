@@ -77,17 +77,19 @@ async def _human_time_duration(seconds):
 
 
 @Client.on_message(
-    command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+    command(["start", f"mstart@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
-async def start_(client: Client, message: Message):
-    await message.reply_photo(
-        photo=f"https://telegra.ph/file/b8dd014a2cf7817df23a1.jpg",           
-        caption=f""" ☞ ✰Hello friends how are you !\n
-☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
+@check_blacklist()
+async def start_(c: Client, message: Message):
+    user_id = message.from_user.id
+    await add_served_user(user_id)
+    await message.reply_text(
+        f"""✨ **Welcome {message.from_user.mention()} !**\n
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **Is a bot to play music and video in groups, through the Telegram Group video chat!**
 
-🂱 I Can Play Music In Your Group.Feel free to add me to your groups.!
+💡 **Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!**
 
-🔖 Powered By:- [𐏓〬⃝ ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ Official ➣LOG⛦ AFK x‌D ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ ااـ꯭](https://t.me/Official_afk_xD)!
+🔖 **To know how to use this bot, please click on the » ❓ Basic Guide button!**
 """,
         reply_markup=InlineKeyboardMarkup(
             [
