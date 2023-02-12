@@ -77,19 +77,18 @@ async def _human_time_duration(seconds):
 
 
 @Client.on_message(
-    command(["start", f"mstart@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+    command(["mstart", f"mstart@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 @check_blacklist()
 async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)
     await message.reply_text(
-        f"""✨ **Welcome {message.from_user.mention()} !**\n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **Is a bot to play music and video in groups, through the Telegram Group video chat!**
+        caption=f""" ☞ ✰Hello friends how are you !\n
 
-💡 **Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!**
+☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
 
-🔖 **To know how to use this bot, please click on the » ❓ Basic Guide button!**
+🂱 I Can Play Music In Your Group.Feel free to add me to your groups.!
 """,
         reply_markup=InlineKeyboardMarkup(
             [
