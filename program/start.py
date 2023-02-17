@@ -83,9 +83,9 @@ async def _human_time_duration(seconds):
 async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)   
-    await message.reply_photo(
-        photo=f"https://telegra.ph/file/f3a0b5b6c64940a1fbb22.jpg",
-        caption=f""" ☞ ✰Hello friends how are you !\n
+    await message.reply_text(
+        f""" ☞ ✰Hello friends how are you !\n
+
 ☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
 
 🂱 I Can Play Music In Your Group.Feel free to add me to your groups.!
@@ -95,13 +95,13 @@ async def start_(c: Client, message: Message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [                                    
-                    InlineKeyboardButton("➕ Aᴅᴅ Mᴇ Tᴏ Uʀ Gʀᴏᴜᴘ ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
-                ],
+                    InlineKeyboardButton("✨ Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP_SUPPORT}"),
+                InlineKeyboardButton(
+                    "📣 Uᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"
+                ),
             ]
-        ),
-        disable_web_page_preview=True,
+        ]
     )
-
 
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
