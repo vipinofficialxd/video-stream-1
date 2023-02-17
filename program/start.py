@@ -86,23 +86,20 @@ async def start_(c: Client, message: Message):
     await message.reply_text(
         f"""☞ ✰Hᴇʟʟᴏ...  ‌ {message.from_user.mention()} 👋🏻\n
 ☞ ✰Iᴍ.. [{me_bot.first_name}](https://t.me/{me_bot.username}) .
-
 ☞ ✰Tʜɪs ɪs Vɪᴅᴇᴏ + Mᴜsɪᴄ🎶 RᴏBᴏᴛ .. 
-
 ☞ I Cᴀɴ Pʟᴀʏ Mᴜsɪᴄ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ.
-
 » Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ :- [🍻ᯓ𝐌 𝚫 𝐇 𝐈ˢ ͪᵘ ᷜˡ ⷶ™🇮🇳](t.me/official_pro_xD).
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [                                    
-                    InlineKeyboardButton("✨ Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP_SUPPORT}"),
-                InlineKeyboardButton(
-                    "📣 Uᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"
-                ),
+                    InlineKeyboardButton("➕ Aᴅᴅ Mᴇ Tᴏ Uʀ Gʀᴏᴜᴘ ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
+                ],
             ]
-        ]
+        ),
+        disable_web_page_preview=True,
     )
+
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
 )
