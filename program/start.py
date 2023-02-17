@@ -99,12 +99,10 @@ async def start_(c: Client, message: Message):
                     InlineKeyboardButton("✨ Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP_SUPPORT}"),
                 InlineKeyboardButton(
                     "📣 Uᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATES_CHANNEL}"
-                ],
+                ),
             ]
-        ),
-        disable_web_page_preview=True,
+        ]
     )
-
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & filters.group & ~filters.edited
 )
