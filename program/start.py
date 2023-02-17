@@ -83,42 +83,30 @@ async def _human_time_duration(seconds):
 async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)   
-    await message.reply_photo(      
-        photo=f"https://telegra.ph/file/16f554eacad2ba383a119.jpg",       
-        caption=f""" ☞ ✰Hello friends how are you !\n
+    await message.reply_text(     
+        f""" ☞ ✰Hello friends how are you !\n
 ☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
 
 🂱 I Can Play Music In Your Group.Feel free to add me to your groups.!
 
-🔖 Powered By:- [𐏓〬⃝ ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ Official ➣LOG⛦ AFK x‌D ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ ااـ꯭](https://t.me/Official_afk_xD)!
+🔖 Powered By:- [𐏓〬⃝ ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ 𝐒 𝐀 𝐌 ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ ااـ꯭](https://t.me/Piro_x_power)!
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "🔎 How to Use? Commands Menu.",
-                        callback_data="command_list",
-                    )
-                ], 
-                [            
-                    InlineKeyboardButton("▪ Support", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("Updates ▪", url=f"https://t.me/{UPDATES_CHANNEL}"),               
+                    InlineKeyboardButton("👷🏻 Basic Cmd", callback_data="command_list"),
+                    InlineKeyboardButton("Basic Info 📚", callback_data="user_guide"),
+                ],[
+                    InlineKeyboardButton("👷🏻 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
+                    InlineKeyboardButton("Channel 👮🏼", url=f"https://t.me/{UPDATES_CHANNEL}"),
+                ],[
+                    InlineKeyboardButton("Summon me", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
+              
                 ],
-                [
-                    InlineKeyboardButton(
-                        "✚ Add me to your Group ✚", url=f"https://t.me/{me_bot.username}?startgroup=true"),
-                ],
-                [
-                    InlineKeyboardButton(
-                        "▪ Chatting xD", url=f"https://t.me/UNIQUE_SOCIETY"
-                    ),
-                    InlineKeyboardButton(
-                        "Source Code ▪", url=f"t.me/iTZZ_OFFICIAL"                  
-                    ),               
-                ]
             ]
         ),
-   )
+        disable_web_page_preview=True,
+    )
 
 
 @Client.on_message(
