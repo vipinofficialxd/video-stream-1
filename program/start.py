@@ -77,14 +77,14 @@ async def _human_time_duration(seconds):
 
 
 @Client.on_message(
-    command(["mstart", f"mstart@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+    command(["start", f"start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
 )
 @check_blacklist()
 async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)
     await message.reply_text(
-        caption=f""" ☞ ✰Hello friends how are you !\n
+        f""" ☞ ✰Hello friends how are you !\n
 
 ☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
 
