@@ -83,8 +83,9 @@ async def _human_time_duration(seconds):
 async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)   
-    await message.reply_text(     
-        f""" ☞ ✰Hello friends how are you !\n
+    await message.reply_photo(
+        photo=f"https://telegra.ph/file/f3a0b5b6c64940a1fbb22.jpg",
+        caption=f""" ☞ ✰Hello friends how are you !\n
 ☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
 
 🂱 I Can Play Music In Your Group.Feel free to add me to your groups.!
