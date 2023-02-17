@@ -93,15 +93,8 @@ async def start_(c: Client, message: Message):
 """,
         reply_markup=InlineKeyboardMarkup(
             [
-                [
-                    InlineKeyboardButton("👷🏻 Basic Cmd", callback_data="command_list"),
-                    InlineKeyboardButton("Basic Info 📚", callback_data="user_guide"),
-                ],[
-                    InlineKeyboardButton("👷🏻 Support", url=f"https://t.me/{GROUP_SUPPORT}"),
-                    InlineKeyboardButton("Channel 👮🏼", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                ],[
-                    InlineKeyboardButton("Summon me", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
-              
+                [                                    
+                    InlineKeyboardButton("➕ Aᴅᴅ Mᴇ Tᴏ Uʀ Gʀᴏᴜᴘ ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
                 ],
             ]
         ),
