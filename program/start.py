@@ -84,13 +84,14 @@ async def start_(c: Client, message: Message):
     user_id = message.from_user.id
     await add_served_user(user_id)   
     await message.reply_text(
-        f""" ☞ ✰Hello friends how are you !\n
+        f"""☞ ✰Hᴇʟʟᴏ...  ‌ {message.from_user.mention()} 👋🏻\n
+☞ ✰Iᴍ.. [{me_bot.first_name}](https://t.me/{me_bot.username}) .
 
-☞ ✰I'am.. [Music Player Bot](https://t.me/{BOT_USERNAME}) !
+☞ ✰Tʜɪs ɪs Vɪᴅᴇᴏ + Mᴜsɪᴄ🎶 RᴏBᴏᴛ .. 
 
-🂱 I Can Play Music In Your Group.Feel free to add me to your groups.!
+☞ I Cᴀɴ Pʟᴀʏ Mᴜsɪᴄ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ.
 
-🔖 Powered By:- [𐏓〬⃝ ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ 𝐒 𝐀 𝐌 ⸙‌ٖٖٖٖٖٖٜٖٖٖٖٖٖ ااـ꯭](https://t.me/Piro_x_power)!
+» Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ :- [🍻ᯓ𝐌 𝚫 𝐇 𝐈ˢ ͪᵘ ᷜˡ ⷶ™🇮🇳](t.me/official_pro_xD).
 """,
         reply_markup=InlineKeyboardMarkup(
             [
