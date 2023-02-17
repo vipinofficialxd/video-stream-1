@@ -85,9 +85,13 @@ async def start_(c: Client, message: Message):
     await add_served_user(user_id)   
     await message.reply_text(
         f"""☞ ✰Hᴇʟʟᴏ...  ‌ {message.from_user.mention()} 👋🏻\n
-☞ ✰Iᴍ.. [{me_bot.first_name}](https://t.me/{me_bot.username}) .
+
+☞ ✰Iᴍ.. [{me_bot.first_name}](https://t.me/{me_bot.username}).
+
 ☞ ✰Tʜɪs ɪs Vɪᴅᴇᴏ + Mᴜsɪᴄ🎶 RᴏBᴏᴛ .. 
+
 ☞ I Cᴀɴ Pʟᴀʏ Mᴜsɪᴄ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ.
+
 » Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ :- [🍻ᯓ𝐌 𝚫 𝐇 𝐈ˢ ͪᵘ ᷜˡ ⷶ™🇮🇳](t.me/official_pro_xD).
 """,
         reply_markup=InlineKeyboardMarkup(
