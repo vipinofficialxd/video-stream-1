@@ -94,12 +94,31 @@ async def start_(c: Client, message: Message):
 """,
         reply_markup=InlineKeyboardMarkup(
             [
-                [                                    
-                    InlineKeyboardButton("➕ Aᴅᴅ Mᴇ Tᴏ Uʀ Gʀᴏᴜᴘ ➕", url=f"https://t.me/{me_bot.username}?startgroup=true")
+                [                   
+                    InlineKeyboardButton(
+                        "Commands & Help ❔", callback_data="cbbasic"
+                    ),
                 ],
+                [
+                    InlineKeyboardButton(
+                        "How to Use Me ❓", callback_data="cbhowtouse"
+                    ),
+                  ],[
+                    InlineKeyboardButton(
+                       "Updates", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    ),
+                    InlineKeyboardButton(
+                       "Support", url=f"https://t.me/{GROUP_SUPPORT}"
+                    )
+                ],[
+                    InlineKeyboardButton(
+                        "➕ Add Me To Your Group ➕",
+                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                    )
+                ]
             ]
         ),
-        disable_web_page_preview=True,
+     disable_web_page_preview=True
     )
 
 
