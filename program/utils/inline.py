@@ -16,8 +16,11 @@ def stream_markup(user_id):
       InlineKeyboardButton(text="‣‣I", callback_data=f'set_skip | {user_id}'),
     ],
     [
-      InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/Team_Bot_support"),
-      InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇs", url=f"https://t.me/team_bot_update"),
+      InlineKeyboardButton(text="• sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/Team_Bot_Support"),
+      InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs •", url=f"https://t.me/team_bot_update"),
+    ],
+    [
+      InlineKeyboardButton(text="• ᴄʟᴏsᴇ •", callback_data="set_close"),
     ],
   ]
   return buttons
