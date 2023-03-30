@@ -92,7 +92,7 @@ async def start_(c: Client, message: Message):
 
 ☞ I Cᴀɴ Pʟᴀʏ Mᴜsɪᴄ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ.
 
-» Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ :- [VIPIN](t.me/SEXYVIPIN).
+» Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ :- [KIARA](t.me/SEXYAADITYA).
 """,
         reply_markup=InlineKeyboardMarkup(
             [
